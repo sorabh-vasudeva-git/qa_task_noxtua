@@ -9,5 +9,18 @@ module.exports = defineConfig({
     baseUrl: "http://localhost:3000",
     specPattern: "cypress/e2e/**/*.cy.js",
     supportFile: "cypress/support/e2e.js",
+    // Screenshots and videos enabled (default true)
+    screenshotOnRunFailure: true,
+    video: true,
+
+    // Setup reporter for Mochawesome
+    reporter: "mochawesome",
+    reporterOptions: {
+      reportDir: "cypress/reports",
+      overwrite: false,
+      html: true,
+      json: true,
+      charts: true,
+    },
   },
 });

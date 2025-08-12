@@ -41,4 +41,9 @@ jobs:
           name: cypress-videos
           path: cypress/videos
 
-     
+      - name: Upload Mochawesome HTML report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: mochawesome-report
+          path: cypress/reports/final-report.html
