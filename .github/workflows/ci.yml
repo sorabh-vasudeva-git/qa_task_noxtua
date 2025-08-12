@@ -1,0 +1,43 @@
+name: Positive Counter Verification Suite
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  e2e-tests:
+    runs-on: ubuntu-latest
+    container:
+      image: cypress/included:12.17.1
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run server and Cypress tests
+        run: npx start-server-and-test "http-server -p 3000 -a 0.0.0.0" http://localhost:3000 "npm test"
+
+      - name: Upload screenshots
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: cypress-screenshots
+          path: cypress/screenshots
+
+      - name: Upload videos
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: cypress-videos
+          path: cypress/videos
+
+      - name: Upload Mochawesome HTML report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: mochawesome-report
+          path: cypress/reports/final-report.html
