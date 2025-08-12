@@ -18,18 +18,8 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Start server
-        run: npx http-server -p 3000 -a 0.0.0.0 &
-
-      - name: Wait for server
-        run: npx wait-on http://localhost:3000
-
-      - name: Wait for server (delay)
-        run: sleep 5
-
-
-      - name: Run Cypress tests with Mochawesome report
-        run: npm test
+      - name: Run server and Cypress tests
+        run: npx start-server-and-test "http-server -p 3000 -a 0.0.0.0" http://localhost:3000 "npm test"
 
       - name: Upload screenshots
         if: always()
