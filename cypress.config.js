@@ -6,7 +6,7 @@ module.exports = defineConfig({
       // If you don't have any event handlers, just return config
       return config;
     },
-    baseUrl: "http://localhost:3000",
+     baseUrl: "http://127.0.0.1:3000",
     specPattern: "cypress/e2e/**/*.cy.js",
     supportFile: "cypress/support/e2e.js",
     // Screenshots and videos enabled (default true)
