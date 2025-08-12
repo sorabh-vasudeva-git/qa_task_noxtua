@@ -23,3 +23,24 @@
 //
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
+
+// cypress/support/commands.js
+Cypress.Commands.add("visitCounter", () => {
+  cy.visit("/");
+});
+
+Cypress.Commands.add("getCounterValue", () => {
+  return cy.get("#counter");
+});
+
+Cypress.Commands.add("incrementCounter", () => {
+  cy.get("#increment-btn").click();
+});
+
+Cypress.Commands.add("decrementCounter", () => {
+  cy.get("#decrement-btn").click();
+});
+
+Cypress.Commands.add("assertCounterValue", (expectedValue) => {
+  cy.getCounterValue().should("have.text", expectedValue.toString());
+});
